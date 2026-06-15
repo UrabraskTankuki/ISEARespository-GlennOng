@@ -1,17 +1,12 @@
 # Lab 1a – Setting Up a Linux Environment & Ubuntu/CLI Familiarisation
 
-This guide covers **Lab 1a-1 (Obtaining a Linux Environment)** and **Lab 1a-2 (Ubuntu Desktop and Command Line Familiarisation)**. For each task you'll find the command(s) to run, the kind of output you should expect, and a short explanation of what is happening and why. Take screenshots of your terminal at each step — that's the evidence you'll paste into your GitHub README.
-
----
-
 ## 1a-1: Setting Up Your Virtual Machine
-
-This part is mostly GUI-based (no terminal commands), but document each step with a screenshot:
 
 1. Download **Lubuntu 24.04.2 (Noble Numbat) 64-bit** from https://lubuntu.me/downloads/
 2. Install **Oracle VirtualBox** on your host machine
 3. Create a new VM in VirtualBox, attach the Lubuntu `.iso`, and allocate at least 2GB RAM / 20GB disk
 4. Run through the Ubuntu/Lubuntu installer, setting your username and password
+5. Download guide: https://youtu.be/6Inw_7S2EBo
 
 ### Verify the install
 
@@ -20,39 +15,30 @@ Once you've booted into your new VM and opened a terminal, run:
 ```bash
 lsb_release -a
 ```
-
-**Expected output:**
-```
-No LSB modules are available.
-Distributor ID: Ubuntu
-Description:    Ubuntu 24.04.2 LTS
-Release:        24.04
-Codename:       noble
-```
+<img width="766" height="638" alt="image" src="https://github.com/user-attachments/assets/35e61ea7-f17c-44b9-b01f-789a50965814" />
 
 ```bash
 uname -a
 ```
 
-**Expected output (example):**
-```
-Linux yourname-VirtualBox 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC x86_64 GNU/Linux
-```
+<img width="804" height="634" alt="image" src="https://github.com/user-attachments/assets/5e8a7b88-3122-47c7-9d1f-fa72de02c73a" />
 
-**Explanation:** `lsb_release -a` confirms the exact distribution and version you installed. `uname -a` shows the kernel version, architecture (x86_64), and machine name — useful for confirming your VM is set up correctly before you start the rest of the lab.
+
+**Explanation:** `lsb_release -a` confirms the exact distribution and version you installed. `uname -a` shows the kernel version, architecture (x86_64), and machine name.
 
 ---
 
 ## 1a-2: Ubuntu Desktop and CLI Familiarisation
 
-### GUI Familiarisation (no terminal needed)
+### GUI Familiarisation
 
-Document these with screenshots — no commands required:
 * Open **Firefox** and confirm the internet works
+  <img width="1014" height="805" alt="image" src="https://github.com/user-attachments/assets/b7b773ed-e73d-4934-aa0f-3e3f4a24f1d5" />
 * Open **LibreOffice Writer** and type a short paragraph
+  <img width="1264" height="889" alt="image" src="https://github.com/user-attachments/assets/9521fcc8-d84b-4f8d-9064-9e01f6658d23" />
 * Open the **file manager** and navigate up/down a few folders
-* Open the **Ubuntu/Discover Software Centre** and install any one program (e.g. GIMP)
-
+  <img width="637" height="517" alt="image" src="https://github.com/user-attachments/assets/69ae50f9-2a13-4705-939a-1dbdb2b6c4fd" />
+  
 **Explanation:** This section just confirms your desktop environment is functional before you move to the terminal-heavy parts of the lab.
 
 ---
@@ -66,24 +52,14 @@ Open a terminal (Ctrl+Alt+T or via the app menu).
 ```bash
 ps -e
 ```
-
-**Expected output (truncated example):**
-```
-    PID TTY          TIME CMD
-      1 ?        00:00:01 systemd
-      2 ?        00:00:00 kthreadd
-   1432 ?        00:00:00 gnome-shell
-   2210 pts/0    00:00:00 bash
-   2255 pts/0    00:00:00 ps
-```
+<img width="795" height="638" alt="image" src="https://github.com/user-attachments/assets/c5244402-b61c-40fa-8e65-d929280afcfa" />
 
 **Explanation:** Lists every running process with its Process ID (PID), the terminal it's attached to (TTY), CPU time used, and the command name. This is a snapshot, not a live view.
 
 ```bash
 top
 ```
-
-**Expected output:** A full-screen, live-updating table of processes, sorted by CPU usage by default, with a summary header showing CPU/memory load.
+<img width="809" height="633" alt="image" src="https://github.com/user-attachments/assets/4e8f6da5-0dba-4e98-94ba-5acad12226a5" />
 
 While `top` is running, press **1** — this toggles between an averaged CPU summary and a per-core breakdown (one line per CPU core). Press **q** to quit.
 
@@ -94,66 +70,50 @@ While `top` is running, press **1** — this toggles between an averaged CPU sum
 ```bash
 ls
 ```
-
-**Expected output:**
-```
-Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
-```
+<img width="567" height="69" alt="image" src="https://github.com/user-attachments/assets/1a0bbd11-2681-4b8d-abba-2d6738d653c9" />
 
 ```bash
 ls -la
 ```
 
-**Expected output:**
-```
-total 44
-drwxr-x--- 16 user user 4096 Jun 15 09:00 .
-drwxr-xr-x  3 root root 4096 Jun 15 08:50 ..
--rw-r--r--  1 user user  220 Jun 15 08:50 .bash_logout
--rw-r--r--  1 user user 3771 Jun 15 08:50 .bashrc
-drwxr-xr-x  2 user user 4096 Jun 15 09:00 Desktop
-drwxr-xr-x  2 user user 4096 Jun 15 09:00 Documents
-...
-```
+<img width="667" height="480" alt="image" src="https://github.com/user-attachments/assets/5acc2be8-7b7c-4e49-9535-a8d96e27a053" />
 
 **Explanation:** `ls` only shows visible files/folders. `ls -la` adds the `-a` (all, including hidden "dotfiles" like `.bashrc`) and `-l` (long format, showing permissions, owner, group, size, and last-modified date) flags. This is your first look at file permissions, which becomes important in Lab 1b-2.
 
 #### Creating and editing files
 
 ```bash
+sudo apt install gedit
+```
+```bash
 touch testfile
 ```
-
-**Expected output:** No output — the command succeeds silently and creates an empty file called `testfile`.
-
 ```bash
 gedit testfile
 ```
-*(or, if gedit isn't installed: `sudo apt install featherpad` then `featherpad testfile`)*
-
-**Expected output:** A graphical text editor window opens. Type a paragraph, save, and close.
+<img width="907" height="751" alt="image" src="https://github.com/user-attachments/assets/3551b88c-22d6-4119-b82e-baded66ad6eb" />
 
 ```bash
 nano testfile
 ```
-
-**Expected output:** The terminal switches to nano's editor view, showing your text with a menu bar of shortcuts (e.g. `^X Exit`, `^O Write Out`) at the bottom. Press **Ctrl+X** to exit.
+<img width="801" height="629" alt="image" src="https://github.com/user-attachments/assets/2615e55b-6f7c-4d8d-bcd5-c9184a4b78e3" />
 
 **Explanation:** `gedit`/`featherpad` are graphical (GUI) editors — they need a desktop environment and won't work over a plain SSH session. `nano` is a terminal-based editor that works anywhere, even on headless servers with no GUI at all. This is why server administrators rely on `nano`/`vim` rather than `gedit`.
 
 #### Viewing files: `cat` vs `less`
+Add text to the file and save
+<img width="916" height="157" alt="image" src="https://github.com/user-attachments/assets/46c4cadb-c4a3-4871-8854-fbd93f6b3375" />
 
 ```bash
 cat testfile
 ```
-
-**Expected output:** The entire contents of `testfile` dumped immediately to the terminal.
+<img width="801" height="635" alt="image" src="https://github.com/user-attachments/assets/fc345a12-c1f5-4dce-aebb-9680901d2644" />
 
 ```bash
 less testfile
 ```
 
-**Expected output:** A scrollable, page-by-page view of the file. Press **q** to exit.
+<img width="803" height="633" alt="image" src="https://github.com/user-attachments/assets/3fcd9485-1186-4d68-adf6-0cd9920f9b91" />
 
 **Explanation:** `cat` is best for short files or piping into other commands. `less` is better for long files — it loads the file without printing everything at once, and lets you search (`/keyword`) and scroll.
 
@@ -164,20 +124,13 @@ cp testfile testfile2
 ls
 ```
 
-**Expected output:**
-```
-testfile  testfile2
-```
+<img width="803" height="636" alt="image" src="https://github.com/user-attachments/assets/b4bb5fa5-97d4-487c-ad53-824e74b17d40" />
 
 ```bash
 mv testfile2 testfile3
 ls
 ```
-
-**Expected output:**
-```
-testfile  testfile3
-```
+<img width="812" height="639" alt="image" src="https://github.com/user-attachments/assets/4fc95e98-9853-489d-9dc8-72a16f46007f" />
 
 **Explanation:** `cp` duplicates a file — you end up with two copies. `mv` either renames a file (as shown here) or moves it to a different directory — the original disappears and only the new name/location remains.
 
@@ -186,8 +139,7 @@ testfile  testfile3
 ```bash
 ls -lah
 ```
-
-**Expected output:** Same as `ls -la` but file sizes are shown in human-readable units (K, M, G) instead of raw bytes.
+<img width="807" height="643" alt="image" src="https://github.com/user-attachments/assets/2c6b1920-3279-4da9-9377-1f8342d3a6af" />
 
 **Explanation:** The `-h` flag makes the `-l` long listing easier to read for humans — `4.0K` instead of `4096`.
 
@@ -196,40 +148,17 @@ ls -lah
 ```bash
 uname -a
 ```
-
-**Expected output:**
-```
-Linux yourname-VirtualBox 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC x86_64 x86_64 x86_64 GNU/Linux
-```
+<img width="803" height="633" alt="image" src="https://github.com/user-attachments/assets/b598b1ad-ab70-4d4f-9514-2c976a1df5da" />
 
 ```bash
 lsb_release -a
 ```
-
-**Expected output:**
-```
-Distributor ID: Ubuntu
-Description:    Ubuntu 24.04.2 LTS
-Release:        24.04
-Codename:       noble
-```
+<img width="807" height="631" alt="image" src="https://github.com/user-attachments/assets/24a5a8b3-6603-4d08-a0ac-6949b7bbef79" />
 
 ```bash
 hostnamectl
 ```
-
-**Expected output:**
-```
- Static hostname: yourname-VirtualBox
-       Icon name: computer-vm
-         Chassis: vm
-      Machine ID: 8f3a...
-         Boot ID: 4b2c...
-  Virtualization: oracle
-Operating System: Ubuntu 24.04.2 LTS
-          Kernel: Linux 6.8.0-31-generic
-    Architecture: x86-64
-```
+<img width="802" height="630" alt="image" src="https://github.com/user-attachments/assets/4a6be2c7-3ec7-4ff6-8c52-48827053a2bd" />
 
 **Explanation:** `uname -a` shows kernel-level info. `lsb_release -a` shows distribution-level info (Ubuntu vs Debian vs Fedora etc.). `hostnamectl` combines both plus your hostname and confirms you're running inside a **virtual machine** (`Virtualization: oracle`) — a nice link back to the virtualisation concept from 1a-1.
 
@@ -238,8 +167,7 @@ Operating System: Ubuntu 24.04.2 LTS
 ```bash
 ls -alt
 ```
-
-**Expected output:** Same as `ls -la`, but rows are reordered so the **most recently modified file/folder appears first**.
+<img width="749" height="488" alt="image" src="https://github.com/user-attachments/assets/260a4244-b388-40f2-81ba-82d8ed091fbf" />
 
 **Explanation:** The `-t` flag sorts by modification time (newest first). This is handy when you've just edited or created a file and want to confirm it at the top of the list — useful for debugging "did my script actually save?" type questions.
 
@@ -250,49 +178,26 @@ ls -alt
 ```bash
 whoami
 ```
-
-**Expected output:**
-```
-yourname
-```
+<img width="797" height="636" alt="image" src="https://github.com/user-attachments/assets/6dd923a3-32de-4581-b0ee-b875a772166f" />
 
 ```bash
+sudo -i
 adduser testuser
 ```
-
-**Expected output:**
-```
-adduser: Only root can add a user or group to the system.
-```
+<img width="599" height="287" alt="image" src="https://github.com/user-attachments/assets/30b012ec-c956-4102-b85d-5698c922ba6f" />
 
 ```bash
 sudo whoami
 ```
 
-**Expected output:** (after entering your password)
-```
-root
-```
+<img width="410" height="44" alt="image" src="https://github.com/user-attachments/assets/27c53ab8-174e-4772-b8a3-328584f62a6c" />
 
 ```bash
 sudo adduser testuser
 ```
 
-**Expected output:**
-```
-Adding user `testuser' ...
-Adding new group `testuser' (1001) ...
-Adding new user `testuser' (1001) with group `testuser' ...
-Creating home directory `/home/testuser' ...
-Copying files from `/etc/skel' ...
-New password:
-Retype new password:
-passwd: password updated successfully
-Changing the user information for testuser
-Enter the new value, or press ENTER for the default
-        Full Name []:
-        ...
-Is the information correct? [Y/n] y
+<img width="573" height="260" alt="image" src="https://github.com/user-attachments/assets/2eb66c8b-a6fd-413c-b105-2605ae125c09" />
+
 ```
 
 **Explanation:** Regular users cannot create new accounts — only **root** (the Linux superuser, equivalent to "Administrator" on Windows) can. `sudo` ("superuser do") temporarily elevates your current user to root for a single command, after re-confirming your password. This "principle of least privilege" — staying as a normal user until you explicitly need elevated rights — is a core Linux security concept.
@@ -305,13 +210,7 @@ Is the information correct? [Y/n] y
 ip a
 ```
 
-**Expected output (truncated example):**
-```
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 ...
-    inet 127.0.0.1/8 scope host lo
-2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
-    inet 192.168.1.50/24 brd 192.168.1.255 scope global dynamic enp0s3
-```
+<img width="799" height="416" alt="image" src="https://github.com/user-attachments/assets/7747af48-2c2f-44a8-8bbd-0dc05116f377" />
 
 **Explanation:** Shows every network interface and its assigned IP address(es). `lo` is the loopback interface (always `127.0.0.1`); `enp0s3` (or `eth0`) is your main network adapter, here with a private IP `192.168.1.50`.
 
@@ -320,15 +219,7 @@ ping 8.8.8.8
 ```
 Press **Ctrl+C** to stop.
 
-**Expected output:**
-```
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=14.2 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=13.8 ms
-^C
---- 8.8.8.8 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-```
+<img width="733" height="244" alt="image" src="https://github.com/user-attachments/assets/1903fec0-76b6-4b8e-8032-3be504aa07d0" />
 
 **Explanation:** `8.8.8.8` is one of Google's public DNS servers — it's a reliable address to test that you have internet connectivity, since it almost always responds to pings.
 
@@ -338,23 +229,14 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 less /etc/hosts
 ```
 
-**Expected output:**
-```
-127.0.0.1       localhost
-127.0.1.1       yourname-VirtualBox
-::1     localhost ip6-localhost ip6-loopback
-```
+<img width="538" height="179" alt="image" src="https://github.com/user-attachments/assets/614bfc28-c4e5-49a2-a7ac-f8cb2bb1a23e" />
+
 Press **q** to exit.
 
 ```bash
 ping localhost
 ```
-
-**Expected output:**
-```
-PING localhost (127.0.0.1) 56(84) bytes of data.
-64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.034 ms
-```
+<img width="715" height="242" alt="image" src="https://github.com/user-attachments/assets/dda566fb-b0c5-4c2d-9b94-59995531c765" />
 
 Now add a custom entry:
 
@@ -367,15 +249,12 @@ Add this line at the bottom, save (Ctrl+O) and exit (Ctrl+X):
 8.8.8.8 GoogleEpicDNS
 ```
 
+<img width="801" height="630" alt="image" src="https://github.com/user-attachments/assets/26dc77aa-e736-431e-9f77-65fa3eed6f2c" />
+
 ```bash
 ping GoogleEpicDNS
 ```
-
-**Expected output:**
-```
-PING GoogleEpicDNS (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=14.0 ms
-```
+<img width="779" height="218" alt="image" src="https://github.com/user-attachments/assets/d3bc5386-e98c-402a-9149-9ae7d18eb744" />
 
 **Explanation:** `/etc/hosts` is a simple local lookup table mapping names to IP addresses — checked *before* any DNS server is consulted. By adding `8.8.8.8 GoogleEpicDNS`, you've created a local "alias" so `ping GoogleEpicDNS` resolves to `8.8.8.8`. This is the same mechanism that lets `localhost` resolve to `127.0.0.1`.
 
@@ -384,16 +263,7 @@ PING GoogleEpicDNS (8.8.8.8) 56(84) bytes of data.
 ```bash
 nslookup google.com
 ```
-
-**Expected output:**
-```
-Server:         127.0.0.53
-Address:        127.0.0.53#53
-
-Non-authoritative answer:
-Name:   google.com
-Address: 142.250.66.110
-```
+<img width="808" height="636" alt="image" src="https://github.com/user-attachments/assets/764790cb-9aba-4587-b0b7-e03b6eef714c" />
 
 **Explanation:** Unlike `/etc/hosts` (local-only), DNS is a globally distributed lookup service. `nslookup` asks a DNS server to translate `google.com` into an IP address. You can paste that resulting IP address into your browser and it will load Google's homepage — proving DNS is "just" a name-to-IP lookup.
 
@@ -401,15 +271,7 @@ Address: 142.250.66.110
 sudo apt install whois
 whois google.com
 ```
-
-**Expected output (truncated):**
-```
-   Domain Name: GOOGLE.COM
-   Registrar: MarkMonitor Inc.
-   Registrant Organization: Google LLC
-   Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
-   ...
-```
+<img width="803" height="637" alt="image" src="https://github.com/user-attachments/assets/074ec16a-1638-4c88-98a7-213bcf76515f" />
 
 **Explanation:** `whois` queries domain registration records — useful for finding out who legally owns/administers a domain, and who to contact for abuse complaints.
 
@@ -419,11 +281,11 @@ whois google.com
 ip a
 ```
 
-Note your address (e.g. `192.168.1.50`) — this is a **private** IP, only valid inside your home/office network.
+Note your address (e.g. `127.0.0.1`) — this is a **private** IP, only valid inside your home/office network.
 
 Now open Firefox and visit: https://whatismyipaddress.com/
 
-**Expected output:** A different address is shown (e.g. `203.0.113.45`) — this is your **public** IP, as seen from the internet.
+<img width="1230" height="674" alt="image" src="https://github.com/user-attachments/assets/6eba95ed-66a6-44c6-9809-8c4b25046c49" />
 
 **Explanation:** Your private IP is assigned by your router for use *within* your local network (many devices can share private ranges like `192.168.x.x`). Your public IP is the single address your router/ISP uses to represent your whole network to the outside internet — this is **Network Address Translation (NAT)** at work.
 
@@ -434,39 +296,17 @@ Now open Firefox and visit: https://whatismyipaddress.com/
 ```bash
 lsusb
 ```
-
-**Expected output:**
-```
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 002 Device 002: ID 80ee:0021 VirtualBox USB Tablet
-```
+<img width="723" height="87" alt="image" src="https://github.com/user-attachments/assets/e0177c23-fbc4-4fea-9122-ef0b24928c32" />
 
 ```bash
 lspci
 ```
-
-**Expected output (truncated):**
-```
-00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma]
-00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
-00:02.0 VGA compatible controller: InnoTek Systemberatung GmbH VirtualBox Graphics Adapter
-00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller
-```
+<img width="797" height="438" alt="image" src="https://github.com/user-attachments/assets/8831b0f6-5835-4b95-9467-d1f844b3f7b6" />
 
 ```bash
 less /proc/cpuinfo
 ```
-
-**Expected output:** One block per CPU core, e.g.:
-```
-processor       : 0
-vendor_id       : GenuineIntel
-model name      : Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz
-cpu MHz         : 3792.000
-...
-processor       : 1
-...
-```
+<img width="802" height="635" alt="image" src="https://github.com/user-attachments/assets/597bfc86-fb1d-4c51-8a43-2d604aa9bc18" />
 
 **Explanation:** `lsusb` and `lspci` list devices connected via USB and the PCI bus respectively (in a VM, you'll mostly see virtual hardware). `/proc/cpuinfo` lists every CPU core the OS sees — count the `processor :` entries to see how many cores your VM has been given. Compare this with **Settings → About** in the GUI — the GUI usually gives a cleaner summary, but the CLI gives you the raw detail (e.g. exact CPU model and clock speed).
 
@@ -477,30 +317,23 @@ processor       : 1
 ```bash
 lsusb > output_of_lsusb
 ```
-
-**Expected output:** Nothing printed to the screen — the output of `lsusb` goes into the new file `output_of_lsusb` instead.
-
 ```bash
 less output_of_lsusb
 cat output_of_lsusb
 ```
-
-**Expected output:** Same content as running `lsusb` directly, but now read from the file (`cat` dumps it all at once, `less` lets you scroll).
+<img width="703" height="92" alt="image" src="https://github.com/user-attachments/assets/c67fc714-3984-455f-a9d6-1ad7f6bd5d98" />
+<img width="699" height="108" alt="image" src="https://github.com/user-attachments/assets/93e54516-2393-4ebd-ac45-1e551fa7b65f" />
 
 ```bash
 ls -la output_of_lsusb
 ```
-
-**Expected output:**
-```
--rw-rw-r-- 1 user user 123 Jun 15 09:30 output_of_lsusb
-```
+<img width="639" height="37" alt="image" src="https://github.com/user-attachments/assets/fe47ecc5-9b58-460e-b662-35979fe3a64e" />
 
 ```bash
 rm output_of_lsusb
 ```
-
-**Expected output:** Nothing — the file is silently deleted.
+<img width="486" height="22" alt="image" src="https://github.com/user-attachments/assets/f3572f2e-097e-4434-bef0-1762c13be473" />
+file is removed
 
 **Explanation:** The `>` operator redirects a command's standard output into a file (overwriting it if it exists). This is fundamental for logging, automation, and scripting — instead of a human reading terminal output, a program can capture it for later analysis.
 
