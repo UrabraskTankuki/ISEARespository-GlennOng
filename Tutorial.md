@@ -471,12 +471,3 @@ less hello_world_executable
 
 ---
 
-### Reflection
-
-Write a short paragraph (no commands needed) comparing the four software installation methods covered above:
-1. **Software as a Service** — zero installation, but you depend entirely on the provider and an internet connection
-2. **Downloading a binary (.deb/.exe/.dmg)** — quick, but no automatic updates or dependency checks unless you use a package manager
-3. **Installing from a trusted repository (apt)** — vetted, easy updates, dependency resolution handled for you
-4. **Compiling from source** — maximum flexibility/transparency (you can read the code), but slower and requires build tools
-
-Consider this from two perspectives: as an everyday **user**, and as a **software development company** deciding how to distribute their product.
