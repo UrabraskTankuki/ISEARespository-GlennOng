@@ -1,8 +1,5 @@
 # Lab 1b – Linux Services, SSH, Firewalls, Compression, Permissions & Searching
 
-This guide covers **Lab 1b-1 (Linux Services, SSH, Firewalls & Compression)**, **Lab 1b-2 (Linux File Permissions and Group Access Control)**, and **Lab 1b-3 (File Search, Analysis & Archiving in Linux)**.
----
-
 ## 1b-1: Apache, Nmap, UFW, SSH & Compression
 
 ### Installing the Apache web server
