@@ -341,89 +341,50 @@ file is removed
 
 ### Installing Software
 
-#### Software as a Service (no commands)
-Discuss/note examples like Office 365, Google Docs, Grammarly — software that runs entirely in the browser, with no installation on any OS.
-
 #### Downloading and installing a binary from the web
 
 1. Open Firefox, go to google.com/chrome, download the `.deb` package
 2. Install it:
 
+<img width="1284" height="908" alt="image" src="https://github.com/user-attachments/assets/7c41b210-058a-413f-8d56-656a59791a68" />
+
 ```bash
 sudo apt install ~/Downloads/google-chrome-stable_current_amd64.deb
 ```
-
-**Expected output:** A long list of dependencies being fetched and configured, ending with:
-```
-Setting up google-chrome-stable (125.0.6422.141-1) ...
-```
+<img width="798" height="635" alt="image" src="https://github.com/user-attachments/assets/12244bc0-ca46-4336-aa2d-25d247139804" />
 
 **Explanation:** A `.deb` file is a pre-built binary package for Debian/Ubuntu-based systems — the equivalent of a Windows `.exe`/installer or a macOS `.dmg`. Using `apt install` on a local `.deb` file also automatically resolves and installs any missing dependencies, which a plain double-click often can't do.
 
 #### Installing from a trusted repository
 
 ```bash
-less /etc/apt/sources.list
-```
-
-**Expected output:** A list of repository URLs, e.g.:
-```
-deb http://archive.ubuntu.com/ubuntu/ noble main restricted
-deb http://archive.ubuntu.com/ubuntu/ noble-updates main restricted
-```
-
-```bash
 sudo apt update
 ```
-
-**Expected output:**
-```
-Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-...
-Reading package lists... Done
-```
+<img width="799" height="612" alt="image" src="https://github.com/user-attachments/assets/01cf7a5a-0fca-496f-a494-fc843a4b21fb" />
 
 ```bash
 sudo apt upgrade
 ```
-
-**Expected output:**
-```
-The following packages will be upgraded:
-  firefox libssl3 ...
-2 upgraded, 0 newly installed, 0 to remove.
-Do you want to continue? [Y/n]
-```
+<img width="803" height="634" alt="image" src="https://github.com/user-attachments/assets/e7674211-1487-44e8-a7a9-835c3c043786" />
 
 ```bash
 sudo apt search vlc
 ```
-
-**Expected output (truncated):**
-```
-vlc/noble 3.0.20-1 amd64
-  multimedia player and streamer
-```
+<img width="808" height="645" alt="image" src="https://github.com/user-attachments/assets/35c53fb6-a1db-4f57-bed6-42dd6e272264" />
 
 ```bash
 sudo apt install vlc
 ```
+<img width="703" height="89" alt="image" src="https://github.com/user-attachments/assets/092306a1-fdcc-48e0-8013-e0366b56ab8c" />
 
-**Expected output:** Package download/install progress, ending with:
-```
-Setting up vlc (3.0.20-1) ...
-```
-
-**Explanation:** `/etc/apt/sources.list` tells your system *where* to look for software (Ubuntu's official repositories, which are vetted and trusted). `apt update` refreshes the local list of what's available; `apt upgrade` installs newer versions of already-installed packages. `apt search`/`apt install` find and install new software — this is the command-line equivalent of the Ubuntu Software Centre GUI, and it's the method used on servers that have no GUI at all.
+**Explanation:** `/etc/apt/sources.list` tells your system *here to look for software (Ubuntu's official repositories, which are vetted and trusted). `apt update` refreshes the local list of what's available; `apt upgrade` installs newer versions of already-installed packages. `apt search`/`apt install` find and install new software — this is the command-line equivalent of the Ubuntu Software Centre GUI, and it's the method used on servers that have no GUI at all.
 
 #### Installing from source code
 
 ```bash
 sudo apt install build-essential
 ```
-
-**Expected output:** Installs `gcc`, `make`, and related compiler tools.
+<img width="805" height="625" alt="image" src="https://github.com/user-attachments/assets/26977cbb-898e-4ef8-be85-2429ca74f6fb" />
 
 Create the file:
 
@@ -439,6 +400,7 @@ int main() {
    return 0;
 }
 ```
+<img width="797" height="637" alt="image" src="https://github.com/user-attachments/assets/a379237e-06c2-40e9-ac1e-395dd7905999" />
 
 Save and exit (Ctrl+O, Ctrl+X), then compile and run:
 
@@ -446,11 +408,7 @@ Save and exit (Ctrl+O, Ctrl+X), then compile and run:
 gcc hello_world.c -o hello_world_executable
 ./hello_world_executable
 ```
-
-**Expected output:**
-```
-Hello, World!
-```
+<img width="796" height="92" alt="image" src="https://github.com/user-attachments/assets/71123d19-81a3-4d46-bb49-74ee4d8771e7" />
 
 If you get a permissions error:
 
@@ -464,8 +422,9 @@ Now compare the two files:
 less hello_world.c
 less hello_world_executable
 ```
+<img width="431" height="140" alt="image" src="https://github.com/user-attachments/assets/14f69829-7a1f-4f48-9b9f-528adf870d16" />
 
-**Expected output:** `hello_world.c` shows readable C source code. `hello_world_executable` shows mostly unreadable binary/machine code (garbled characters), possibly with a warning like `"hello_world_executable" may be a binary file. See it anyway?`.
+<img width="736" height="42" alt="image" src="https://github.com/user-attachments/assets/a3c6d3a7-3acc-4bc7-9fd4-1732a413d496" />
 
 **Explanation:** `build-essential` provides the compiler toolchain. `gcc` translates (compiles) human-readable C source code into a binary executable that the CPU can run directly. Comparing the two files with `less` visually demonstrates the difference between **source code** (what developers write) and **machine code** (what the computer actually executes) — this is "installing from source," as opposed to downloading a pre-compiled binary.
 
